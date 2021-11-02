@@ -263,9 +263,9 @@ int main()
 {
     
     ll k = 4 ;
-    //cin>> k ;
+    cin>> k ;
     string file_name  =  "i.txt" ;
-    //cin>>file_name >>k ; 
+    cin>>file_name >>k ; 
     
     indata.open(file_name); // opens the file
     if(!indata) { // file couldn't be opened
