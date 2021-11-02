@@ -266,6 +266,7 @@ int main()
     cin>> k ;
     string file_name  =  "i.txt" ;
     cin>>file_name >>k ; 
+    cout<<file_name <<" " << k << "\n" ; 
     
     indata.open(file_name); // opens the file
     if(!indata) { // file couldn't be opened
