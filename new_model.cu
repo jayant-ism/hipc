@@ -268,8 +268,9 @@ int main()
     string file_name   ;
     cin>>file_name >>k ;
 
-    cout<<file_name <<" " << k << "\n" ; 
-
+//    cout<<file_name <<" " << k << "\n" ; 
+    scanf("%s" , file_name) ;  
+    scanf("%d" , k) ; 
     indata.open(file_name); // opens the file
     if(!indata) { // file couldn't be opened
       cerr << "Error: file could not be opened" << endl;
