@@ -5,6 +5,7 @@
 #include<set>
 #include<fstream>
 #include <chrono>
+#include<stdio.h>
 
 
 using namespace std::chrono;
@@ -265,7 +266,8 @@ int main()
     ll k = 4 ;
     cin>> k ;
     string file_name   ;
-    cin>>file_name >>k ; 
+    cin>>file_name >>k ;
+
     cout<<file_name <<" " << k << "\n" ; 
 
     indata.open(file_name); // opens the file
