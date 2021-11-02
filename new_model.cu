@@ -249,7 +249,7 @@ ll find_kcliq(ll k)
             //We need to update the values now 
             cli++ ; 
             current_cli_size = new_next_cliq ; 
-
+            cudaFree(device_number_cli) ; 
 
 
         }   
