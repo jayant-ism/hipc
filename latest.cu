@@ -1,4 +1,3 @@
-
 //////////////////////////////////////////New code////////////////////////////////////
 
 #include<iostream>
@@ -50,7 +49,7 @@ __global__ void make_count (ll* device_edges , ll* device_last_ele ,ll*  device_
     if(index < current_cli_size )
     {
         device_count[index] =0  ; 
-        for(ll i = index ; i<current_cli_size && device_group[index] == device_group[i] ; i++)
+        for(ll i = index +1 ; i<current_cli_size && device_group[index] == device_group[i] ; i++)
         {
             if(check_edge(device_edges  , 0 , m-1 , device_last_ele[index] , device_last_ele[i]))
             device_count[index]++ ; //Since it is sorted we need not worry about anything other  
@@ -68,7 +67,7 @@ __global__ void  make_next(ll* device_edges ,ll* device_last_ele ,ll* device_gro
     {
         ll starting_ele = device_count[index] ; 
         device_count[index] =0  ; 
-        for(ll i = index ; i<current_cli_size && device_group[index] == device_group[i] ; i++)
+        for(ll i = index+ 1  ; i<current_cli_size && device_group[index] == device_group[i] ; i++)
         {
             if(check_edge(device_edges  , 0 , m-1 , device_last_ele[index] , device_last_ele[i]))
             {
@@ -174,14 +173,16 @@ ll find_kcliq(ll k)
          count[i] = new_cli_size ; 
          new_cli_size += temp ; 
         }
-     
+      
+        cudaMemcpy(device_count,count.data()   , sizeof(ll)*current_cli_size, cudaMemcpyHostToDevice )  ;
+  
      if(new_cli_size==0)
      {
          current_cli_size = 0 ; 
       break ; 
      }
      
-     if(cli+1 <k)
+     if(1+cli < k   )
      {
          //Updete the value
         ll *device_new_group , *device_new_last ; 
@@ -193,12 +194,11 @@ ll find_kcliq(ll k)
         cudaFree(device_group) ;
         device_last_ele = device_new_last ; 
         device_group = device_new_group ;  
-      
        
      }
      
 
-    cli++ ; 
+     cli++ ; 
      current_cli_size = new_cli_size ; 
  
     }
@@ -217,7 +217,7 @@ int main()
     
     ll k = 4 ;
     //cin>> k ;
-    string file_name  =  "i.txt" ;
+    string file_name  =  "com-youtube.ungraph.txt" ;
     cin>>file_name >>k ; 
     
     indata.open(file_name); // opens the file
