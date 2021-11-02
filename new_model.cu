@@ -4,6 +4,12 @@
 #include<vector>
 #include<set>
 #include<fstream>
+#include <chrono>
+
+
+using namespace std::chrono;
+using std::ifstream;
+ifstream indata ; 
 
 #define ll long long int 
 
@@ -140,10 +146,6 @@ __global__ void make_next_cli (ll* edges ,ll* last_cliq ,ll n ,ll m ,ll current_
 
 
 
-#include <fstream>
-using std::ifstream;
-ifstream indata ; 
-
 
 void  make_two_cli(ll m  , vector<ll>& host_edges , vector<ll>& host_two_cli  )
 { 
@@ -151,20 +153,23 @@ void  make_two_cli(ll m  , vector<ll>& host_edges , vector<ll>& host_two_cli  )
     for(ll i =0;i<m;i++)
     {
         ll a,b ; indata>>a>>b ; 
-        tem.insert({a,b})  ;    //Considering the directed edges 
-        tem.insert({b,a})  ;    //Considering the directed edges 
+        tem.insert({a,b})  ;     
+        tem.insert({b,a})  ;    //Considering the undirected edges 
     
     }
     for(auto i : tem)
     {
-        
-        /*
-        //Directed
-      if(i.first < i.second && (tem.find({i.second , i.first }) != tem.end()) )
-         {host_two_cli.push_back(i.first) ;  host_two_cli.push_back(i.second) ;} 
-        */
-      host_edges.push_back(i.first);host_edges.push_back(i.second); //It will be automatically sorted 
+        /* Directed 
+            if(i.first < i.second && (tem.find({i.second , i.first }) != tem.end()) )
+                {host_two_cli.push_back(i.first) ;  host_two_cli.push_back(i.second) ;} 
+            host_edges.push_back(i.first);host_edges.push_back(i.second); //It will be automatically sorted 
      
+        */
+        
+        /*Undirected*/
+        
+        host_edges.push_back(i.first);host_edges.push_back(i.second); //It will be automatically sorted 
+        
       if(i.first < i.second )
          {host_two_cli.push_back(i.first) ;  host_two_cli.push_back(i.second) ; }
        
@@ -257,14 +262,24 @@ ll find_kcliq(ll k)
 int main()
 {
     
-    ll k = 7 ;
+    ll k = 4 ;
     //cin>> k ;
-    string file_name  =  "com-youtube.ungraph.txt" ;
+    string file_name  =  "i.txt" ;
+    //cin>>file_name >>k ; 
     
     indata.open(file_name); // opens the file
     if(!indata) { // file couldn't be opened
       cerr << "Error: file could not be opened" << endl;
       exit(1);
     }
-    cout<<find_kcliq(k) ; 
+  milliseconds ms = duration_cast< milliseconds >(
+    system_clock::now().time_since_epoch()
+);
+ 
+    ll ms1 =std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+    ll ans  =  find_kcliq(k) ;
+    ll ms2 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+    
+    cout<< ans  <<"\nExecution Time: "<< ms2 - ms1 <<"ms" ;
+
 }
