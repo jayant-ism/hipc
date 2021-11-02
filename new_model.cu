@@ -281,6 +281,6 @@ int main()
     ll ans  =  find_kcliq(k) ;
     ll ms2 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
     
-    cout<< ans  <<"\nExecution Time: "<< ms2 - ms1 <<"ms" ;
+    cout<< ans  <<"\nExecution Time: "<< ms2 - ms1 <<"ms\n" ;
 
 }
