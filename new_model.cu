@@ -263,14 +263,11 @@ ll find_kcliq(ll k)
 int main()
 {
     
-    ll k = 4 ;
-    cin>> k ;
+    ll k  ;
     string file_name   ;
-    cin>>file_name >>k ;
-
+  
+    cin>>file_name >> k ; 
 //    cout<<file_name <<" " << k << "\n" ; 
-    scanf("%s" , file_name) ;  
-    scanf("%d" , k) ; 
     indata.open(file_name); // opens the file
     if(!indata) { // file couldn't be opened
       cerr << "Error: file could not be opened" << endl;
