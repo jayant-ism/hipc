@@ -12,7 +12,7 @@ using namespace std::chrono;
 using std::ifstream;
 ifstream indata ; 
 
-#define ll long long int 
+#define ll  long int 
 
 
 using namespace std;
