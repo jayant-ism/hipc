@@ -46,6 +46,26 @@ __global__ void make_count (ll* device_edges , ll* device_last_ele  ,ll current_
 {
     
       ll index = blockDim.x * blockIdx.x + threadIdx.x ;
+
+      if(index*2 < current_cli_size )
+        {
+            if(index%2==1)
+            {
+                index = current_cli_size - index -1;
+            }
+        }else 
+        {
+            index = current_cli_size - index -1  ;
+            
+            if(index%2==0)
+            {
+                index = current_cli_size - index -1  ;
+            }
+        }
+
+        
+
+
     if(index < current_cli_size )
     {
         device_count[index] =0  ; 
@@ -67,7 +87,7 @@ __global__ void  make_next(ll* device_edges ,ll* device_last_ele  ,ll current_cl
     {
         //we need to find the new index 
 
-        if(index*index < current_cli_size )
+        if(index*2 < current_cli_size )
         {
             if(index%2==1)
             {
@@ -82,6 +102,8 @@ __global__ void  make_next(ll* device_edges ,ll* device_last_ele  ,ll current_cl
                 index = current_cli_size - index -1  ;
             }
         }
+
+
         ll starting_ele = device_count[index] ;
         for(ll i = index+ 1  ; i<current_cli_size && device_last_ele[index*2] == device_last_ele[i*2] ; i++)
         {
