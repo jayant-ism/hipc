@@ -215,10 +215,10 @@ ll find_kcliq(ll k)
 int main()
 {
     
-    ll k = 3 ;
+    ll k ;
     //cin>> k ;
-    string file_name  =  "com-youtube.ungraph.txt" ;
-    //cin>>file_name >>k ; 
+    string file_name ;
+    cin>>file_name >>k ; 
 
     indata.open(file_name); // opens the file
     if(!indata) { // file couldn't be opened
